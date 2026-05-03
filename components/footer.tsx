@@ -1,10 +1,14 @@
-import Link from 'next/link'
-import { Linkedin, Twitter } from 'lucide-react'
+"use client"
 
-const footerLinks = [
-  { label: 'Form ADV', href: '/form-adv' },
-  { label: 'Privacy Policy', href: '/privacy-policy' },
-  { label: 'Disclosures', href: '/disclosures' },
+import { Linkedin, Twitter } from 'lucide-react'
+import { LegalModal } from './legal-modals'
+
+type LegalModalType = "form-adv" | "privacy-policy" | "disclosures"
+
+const legalLinks: { label: string; type: LegalModalType }[] = [
+  { label: 'Form ADV', type: 'form-adv' },
+  { label: 'Privacy Policy', type: 'privacy-policy' },
+  { label: 'Disclosures', type: 'disclosures' },
 ]
 
 const socialLinks = [
@@ -35,14 +39,15 @@ export function Footer() {
               Legal
             </h4>
             <ul className="space-y-2">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-                  >
-                    {link.label}
-                  </Link>
+              {legalLinks.map((link) => (
+                <li key={link.type}>
+                  <LegalModal type={link.type}>
+                    <button
+                      className="text-sm text-primary-foreground/80 transition-colors hover:text-primary-foreground cursor-pointer"
+                    >
+                      {link.label}
+                    </button>
+                  </LegalModal>
                 </li>
               ))}
             </ul>
