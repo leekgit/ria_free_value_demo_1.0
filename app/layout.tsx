@@ -1,14 +1,22 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter',
+})
+
+const playfair = Playfair_Display({ 
+  subsets: ["latin"],
+  variable: '--font-playfair',
+})
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Thorne Capital Management | Fee-Only Fiduciary Wealth Management',
+  description: 'Independent RIA providing fee-only fiduciary wealth management for tech professionals and early retirees. Schedule your Fit Meeting with Marcus Thorne, CFP®.',
+  keywords: ['wealth management', 'fiduciary', 'fee-only', 'CFP', 'financial advisor', 'tech professionals', 'early retirement'],
   generator: 'v0.app',
   icons: {
     icon: [
@@ -29,13 +37,17 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport = {
+  themeColor: '#0f172a',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${playfair.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
